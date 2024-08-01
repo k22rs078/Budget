@@ -11,25 +11,25 @@ struct CalendarView: View {
     @State private var currentDate = Date() // 現在の表示日を管理
     
     let calendar = Calendar.current
-
+    
     var daysOfWeek: [String] {
         calendar.shortWeekdaySymbols
     }
-
+    
     var daysInMonth: [Int] {
         let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
         let range = calendar.range(of: .day, in: .month, for: startOfMonth)!
         return Array(range)
     }
-
+    
     var firstDayOfMonth: Date {
         calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
     }
-
+    
     var firstDayWeekday: Int {
         calendar.component(.weekday, from: firstDayOfMonth) // 1 = Sunday, 2 = Monday, ...
     }
-
+    
     var body: some View {
         VStack {
             // 月の表示とナビゲーションボタン
@@ -44,7 +44,7 @@ struct CalendarView: View {
                         .font(.largeTitle)
                         .padding()
                 }
-
+                
                 Spacer()
                 
                 Text("\(calendar.monthSymbols[calendar.component(.month, from: currentDate) - 1]) \(calendar.component(.year, from: currentDate))")
@@ -64,7 +64,7 @@ struct CalendarView: View {
                         .padding()
                 }
             }
-
+            
             // 曜日のヘッダー
             HStack {
                 ForEach(daysOfWeek, id: \.self) { day in
@@ -74,23 +74,27 @@ struct CalendarView: View {
                         .font(.subheadline)
                 }
             }
-
+            
             // 日付のグリッド
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 10) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(minimum: 40)), count: 7), spacing: 10) {
                 // 空白セルを表示して、月の始まりの位置を合わせる
-                ForEach(1..<firstDayWeekday, id: \.self) { _ in
-                    Text("") // 空白を表示
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                ForEach(0..<firstDayWeekday - 1, id: \.self) { _ in
+                    Rectangle()
+                        .frame(height: 40) // 空白のサイズを設定
+                        .opacity(0) // 完全に透明にする
                 }
-
+                
                 // 現在の月の日付を表示
                 ForEach(daysInMonth, id: \.self) { day in
+                    let date = calendar.date(byAdding: .day, value: day - 1, to: firstDayOfMonth)!
                     Text("\(day)")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(10)
-                        .background(Color.blue.opacity(0.3))
+                        .background(calendar.isDateInToday(date) ? Color.blue.opacity(0.5) : Color.green.opacity(0.3))
                         .clipShape(Circle())
-                        .font(.title3) // フォントサイズを調整
+                        .font(.title3)
+                        .foregroundColor(calendar.isDateInToday(date) ? .white : .black)
+                        .frame(height: 40) // 日付の高さを設定
                 }
             }
             .padding()

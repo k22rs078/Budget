@@ -10,6 +10,9 @@ import SwiftUI
 struct InputView: View {
     
     let today = Date()
+    
+
+//    let todayDC = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: today)
     var body: some View {
         Text("\(today)")
             .font(.title)
