@@ -22,6 +22,7 @@ struct CalendarView: View {
         return Array(range)
     }
     
+    
     var firstDayOfMonth: Date {
         calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
     }
@@ -78,7 +79,7 @@ struct CalendarView: View {
             // 日付のグリッド
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(minimum: 40)), count: 7), spacing: 10) {
                 // 空白セルを表示して、月の始まりの位置を合わせる
-                ForEach(0..<firstDayWeekday - 1, id: \.self) { _ in
+                ForEach(0..<firstDayWeekday - 1, id: \.self) { a in
                     Rectangle()
                         .frame(height: 40) // 空白のサイズを設定
                         .opacity(0) // 完全に透明にする
@@ -86,15 +87,29 @@ struct CalendarView: View {
                 
                 // 現在の月の日付を表示
                 ForEach(daysInMonth, id: \.self) { day in
+//                    let date = calendar.date(byAdding: .day, value: day - 1, to: firstDayOfMonth)!
+//                    
+//                    Text("\(day)")
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                        .padding(10)
+//                        .background(calendar.isDateInToday(date) ? Color.blue.opacity(0.5) : Color.green.opacity(0.3))
+//                        .clipShape(Circle())
+//                        .font(.title3)
+//                        .foregroundColor(calendar.isDateInToday(date) ? .white : .black)
+//                        .frame(height: 40) // 日付の高さを設定
                     let date = calendar.date(byAdding: .day, value: day - 1, to: firstDayOfMonth)!
-                    Text("\(day)")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(10)
-                        .background(calendar.isDateInToday(date) ? Color.blue.opacity(0.5) : Color.green.opacity(0.3))
-                        .clipShape(Circle())
-                        .font(.title3)
-                        .foregroundColor(calendar.isDateInToday(date) ? .white : .black)
-                        .frame(height: 40) // 日付の高さを設定
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("\(day)")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .padding(10)
+                            .background(calendar.isDateInToday(date) ? Color.blue.opacity(0.5) : Color.green.opacity(0.3))
+                            .clipShape(Circle())
+                            .font(.title3)
+                            .foregroundColor(calendar.isDateInToday(date) ? .white : .black)
+                            .frame(height: 40) // 日付の高さを設定
+                    })
                 }
             }
             .padding()
