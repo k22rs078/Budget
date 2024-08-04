@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58B3095A2C5DF1D300F80BBA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B309592C5DF1D300F80BBA /* SettingView.swift */; };
 		58E433812C53692300AE0576 /* BudgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E433802C53692300AE0576 /* BudgetApp.swift */; };
 		58E433832C53692300AE0576 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E433822C53692300AE0576 /* ContentView.swift */; };
 		58E433852C53692900AE0576 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58E433842C53692900AE0576 /* Assets.xcassets */; };
 		58E433882C53692900AE0576 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58E433872C53692900AE0576 /* Preview Assets.xcassets */; };
-		58E4338F2C536AC000AE0576 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E4338E2C536AC000AE0576 /* InputView.swift */; };
 		58E433912C536AE100AE0576 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E433902C536AE100AE0576 /* CalendarView.swift */; };
 		58E433932C536AFB00AE0576 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E433922C536AFB00AE0576 /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58B309592C5DF1D300F80BBA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		58E4337D2C53692300AE0576 /* Budget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Budget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58E433802C53692300AE0576 /* BudgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetApp.swift; sourceTree = "<group>"; };
 		58E433822C53692300AE0576 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		58E433842C53692900AE0576 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58E433872C53692900AE0576 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		58E4338E2C536AC000AE0576 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		58E433902C536AE100AE0576 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		58E433922C536AFB00AE0576 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,7 +59,7 @@
 			children = (
 				58E433802C53692300AE0576 /* BudgetApp.swift */,
 				58E433822C53692300AE0576 /* ContentView.swift */,
-				58E4338E2C536AC000AE0576 /* InputView.swift */,
+				58B309592C5DF1D300F80BBA /* SettingView.swift */,
 				58E433902C536AE100AE0576 /* CalendarView.swift */,
 				58E433922C536AFB00AE0576 /* GraphView.swift */,
 				58E433842C53692900AE0576 /* Assets.xcassets */,
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58E433932C536AFB00AE0576 /* GraphView.swift in Sources */,
-				58E4338F2C536AC000AE0576 /* InputView.swift in Sources */,
+				58B3095A2C5DF1D300F80BBA /* SettingView.swift in Sources */,
 				58E433832C53692300AE0576 /* ContentView.swift in Sources */,
 				58E433912C536AE100AE0576 /* CalendarView.swift in Sources */,
 				58E433812C53692300AE0576 /* BudgetApp.swift in Sources */,

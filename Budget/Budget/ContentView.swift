@@ -10,11 +10,6 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView{
-            InputView() //1枚目の子ビュー
-                .tabItem {
-                    Image(systemName: "pencil.line")
-                    Text("入力")
-                }
             CalendarView() //2枚目の子ビュー
                 .tabItem {
                     Image(systemName: "calendar")
@@ -24,6 +19,11 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "chart.pie")
                     Text("グラフ")
+                }
+            SettingView() //1枚目の子ビュー
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("設定")
                 }
         }
     }
