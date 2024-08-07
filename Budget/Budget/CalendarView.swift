@@ -13,7 +13,13 @@ struct CalendarView: View {
     @State private var int: Int? = nil //int をオプショナル型にして、初期値を nil に設定
     @State var int1: Int = 0
     @State private var currentDate = Date() // 現在の表示日を管理
-    @State private var selectedDate: Date? = nil // 選択された日付を管理するための変数
+    @State private var selectedDate: Date? = Date() //選択された日付を管理するための変数
+    @State private var startDate = Calendar.current.date(from: DateComponents(year: 2023, month: 8, day: 1))!
+    @State private var endDate = Calendar.current.date(from: DateComponents(year: 2026, month: 8, day: 15))!
+    @State private var dateArray: [Date] = []
+    @State private var dailyValues: [Date: [Int]] = [:]
+    @State private var monthlyValues: [String: Int] = [:]
+    @State private var yearValues: [String: Int] = [:]
     
     let calendar = Calendar.current
     
@@ -26,7 +32,6 @@ struct CalendarView: View {
         let range = calendar.range(of: .day, in: .month, for: startOfMonth)!
         return Array(range)
     }
-    
     
     var firstDayOfMonth: Date {
         calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
@@ -93,19 +98,14 @@ struct CalendarView: View {
                     
                     // 現在の月の日付を表示
                     ForEach(daysInMonth, id: \.self) { day in
-                        //                    let date = calendar.date(byAdding: .day, value: day - 1, to: firstDayOfMonth)!
-                        //
-                        //                    Text("\(day)")
-                        //                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        //                        .padding(10)
-                        //                        .background(calendar.isDateInToday(date) ? Color.blue.opacity(0.5) : Color.green.opacity(0.3))
-                        //                        .clipShape(Circle())
-                        //                        .font(.title3)
-                        //                        .foregroundColor(calendar.isDateInToday(date) ? .white : .black)
-                        //                        .frame(height: 40) // 日付の高さを設定
                         let date = calendar.date(byAdding: .day, value: day - 1, to: firstDayOfMonth)!
                         Button(action: {
                             selectedDate = date
+                            if let amount = dailyValues[date] {
+                                print("Selected date: \(dateFormatter.string(from: date)), Amount: \(amount)")
+                            } else {
+                                print("Selected date: \(dateFormatter.string(from: date)), Amount: 0")
+                            }
                         }, label: {
                             Text("\(day)")
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -119,14 +119,23 @@ struct CalendarView: View {
                     }
                 }
                 .padding()
+                
                 VStack(spacing: 0){
                     GroupBox{
                         TextField("金額", value: $int, format: .number)
+                            .keyboardType(.numberPad)
                             .textFieldStyle(.roundedBorder)
                     }
+                    
                     HStack(spacing: 0) {
                         Button(action: {
-                            
+                            if let date = selectedDate, let amount = int {
+                                if dailyValues[date] == nil{
+                                    dailyValues[date] = []
+                                }
+                                dailyValues[date]?.append(amount)
+                                int = nil
+                            }
                         }, label: {
                             ZStack{
                                 Rectangle()
@@ -135,11 +144,17 @@ struct CalendarView: View {
                                 Text("収入")
                                     .frame(width: geometry.size.width / 2, height: 50)
                             }
-                            
                         })
-                        .disabled((int ?? 0) <= 0) //isEnabledがfalseの場合にボタンを無効化
+                        .disabled((int ?? 0) <= 0) // isEnabledがfalseの場合にボタンを無効化
+                        
                         Button(action: {
-                            
+                            if let date = selectedDate, let amount = int {
+                                if dailyValues[date] == nil{
+                                    dailyValues[date] = []
+                                }
+                                dailyValues[date]?.append(-amount)
+                                int = nil
+                            }
                         }, label: {
                             ZStack{
                                 Rectangle()
@@ -153,10 +168,22 @@ struct CalendarView: View {
                     }
                 }
             }
+            .onAppear{
+                selectedDate = Date()
+                currentDate = Date()
+            }
         }
     }
 }
 
+// 日付フォーマットを定義
+let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy/MM/dd"
+    return formatter
+}()
+
 #Preview {
     CalendarView()
 }
+

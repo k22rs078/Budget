@@ -15,11 +15,11 @@ struct ContentView: View {
                     Image(systemName: "calendar")
                     Text("カレンダー")
                 }
-            GraphView()
-                .tabItem {
-                    Image(systemName: "chart.pie")
-                    Text("グラフ")
-                }
+//            GraphView()
+//                .tabItem {
+//                    Image(systemName: "chart.pie")
+//                    Text("グラフ")
+//                }
             SettingView() //1枚目の子ビュー
                 .tabItem {
                     Image(systemName: "gear")
